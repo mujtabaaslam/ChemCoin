@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import com.google.gson.GsonBuilder;
 
 public class BlockChainDriver {
     public static void printUsage() {
@@ -23,7 +26,15 @@ public class BlockChainDriver {
     }
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
-        if (args.length != 1) {
+    	
+    	BlockChain blockchain = new BlockChain("hi");
+   
+    	
+   
+		String blockchainJson = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);		
+		System.out.println(blockchainJson);
+    	
+        /*if (args.length != 1) {
             printUsage();
         } else {
             BlockChain chain = new BlockChain(Integer.parseInt(args[0]));
@@ -66,6 +77,6 @@ public class BlockChainDriver {
                 }
                 System.out.println();
             }
-        }
+        }*/
     }
 }
