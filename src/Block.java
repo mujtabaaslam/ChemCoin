@@ -68,7 +68,7 @@ public class Block {
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
 		buf.append(String.format(
-				"Block %d (Amount: %d, Nonce: %d, prevHash: %s, hash: %s)",
+				"Block %d (InchiKey: %s, Nonce: %d, prevHash: %s, hash: %s)",
 				num, inchiKey, nonce, prevHash, hash));
 		return buf.toString();
 	}
@@ -76,18 +76,18 @@ public class Block {
 		String calculatedhash = StringUtil.applySha256( 
 				this.prevHash +
 				Long.toString(this.timeStamp) +
-				this.inchiKey
+				this.inchiKey + this.nonce
 				);
 		return calculatedhash;
 	}
 	
 	public void mineBlock(int difficulty) {
 		String target = new String(new char[difficulty]).replace('\0', '0'); //Create a string with difficulty * "0" 
-		while(!hash.substring( 0, difficulty).equals(target)) {
-			nonce ++;
-			hash = calculateHash();
+		while(!this.hash.substring( 0, difficulty).equals(target)) {
+			this.nonce ++;
+			this.hash = calculateHash();
 		}
-		System.out.println("Block Mined!!! : " + hash);
+		System.out.println("Block Mined!!! : " + this.hash);
 	}
 	
 }

@@ -18,6 +18,7 @@ public class BlockChain {
 
     public BlockChain(String inchi) throws NoSuchAlgorithmException {
         first = new Node(new Block(0, inchi, null));
+        first.data.mineBlock(difficulty);
         last  = first;
     }
 
@@ -34,6 +35,7 @@ public class BlockChain {
             throw new IllegalArgumentException();
         } else {
             Node n = new Node(blk);
+            blk.mineBlock(difficulty);
             last.next = n;
             last = n;
         }

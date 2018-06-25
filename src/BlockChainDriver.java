@@ -3,7 +3,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.google.gson.GsonBuilder;
+//import com.google.gson.GsonBuilder;
 
 public class BlockChainDriver {
     public static void printUsage() {
@@ -27,12 +27,21 @@ public class BlockChainDriver {
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
     	
-    	BlockChain blockchain = new BlockChain("hi");
+    	BlockChain blockchain = new BlockChain("hi im a tidepod");
+    	System.out.println(blockchain.toString());
+    	blockchain.append(new Block(1, "tidepod", blockchain.getHash()));
+    	System.out.println(blockchain.toString());
+    	blockchain.append(new Block(2, "tidepod1", blockchain.getHash()));
+    	System.out.println(blockchain.toString());
+    	blockchain.append(new Block(3, "tidepod2", blockchain.getHash()));
+    	System.out.println(blockchain.toString());
+    	blockchain.append(new Block(4, "tidepod3", blockchain.getHash()));
+    	System.out.println(blockchain.toString());
    
     	
    
-		String blockchainJson = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);		
-		System.out.println(blockchainJson);
+		//String blockchainJson = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);		
+		//System.out.println(blockchainJson);
     	
         /*if (args.length != 1) {
             printUsage();
