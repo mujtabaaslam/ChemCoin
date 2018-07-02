@@ -3,8 +3,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//import com.google.gson.GsonBuilder;
-
 public class BlockChainDriver {
     public static void printUsage() {
         System.out.println("Usage: BlockChainDriver <string>");
