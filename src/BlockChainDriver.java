@@ -14,6 +14,7 @@ public class BlockChainDriver {
         System.out.println("    remove: removes the last block from the end of the chain");
         System.out.println("    check: checks that the block chain is valid");
         System.out.println("    help: prints this list of commands");
+        System.out.println("    search: searches the blockchain for an inchi");
         System.out.println("    quit: quits the program");
     }
 
@@ -50,6 +51,14 @@ public class BlockChainDriver {
                     printCommands();
                 } else if (resp.equals("quit")) {
                     isRunning = false;
+                } else if (resp.equals("search")) {
+                	String inchi = promptFor(in, "Inchi?");
+                	boolean exists = chain.search(inchi);
+                	if(exists) {
+                		System.out.println("Yes");
+                	} else {
+                		System.out.println("No");
+                	}
                 } else {
                     System.out.printf("Error: \"%s\" is not a valid command\n", resp);
                 }

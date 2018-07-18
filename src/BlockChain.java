@@ -92,4 +92,21 @@ public class BlockChain {
         }
         return buf.toString();
     }
+    
+    public Boolean search(String inchi) {
+    	return searchH(inchi, first);
+    }
+    
+    public Boolean searchH(String inchi, Node root) {
+    	System.out.println(root.data.getInchiKey());
+    if (root.data.getInchiKey().equals(inchi)){
+    	return true;
+    }
+    else if (root.equals(last)) {
+    	return false;
+    }
+    else {
+    	return searchH(inchi, root.next);
+    }
+    }
 }
