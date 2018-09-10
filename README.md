@@ -1,4 +1,4 @@
-# BlockChain
+# ChemCoin
 
 Faizaan Ali
 Mujtaba Aslam
