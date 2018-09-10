@@ -16,8 +16,8 @@ public class BlockChain {
     private Node first;
     private Node last;
 
-    public BlockChain(String inchi) throws NoSuchAlgorithmException {
-        first = new Node(new Block(0, inchi, null));
+    public BlockChain(String inchi, String owner) throws NoSuchAlgorithmException {
+        first = new Node(new Block(0, owner, inchi, null));
         first.data.mineBlock(difficulty);
         last  = first;
     }

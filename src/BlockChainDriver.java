@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class BlockChainDriver {
     public static void printUsage() {
-        System.out.println("Usage: BlockChainDriver <string>");
+        System.out.println("Usage: BlockChainDriver <string> <string>");
     }
 
     public static void printCommands() {
@@ -24,18 +24,19 @@ public class BlockChainDriver {
     }
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
-        if (args.length != 1) {
+        if (args.length != 2) {
             printUsage();
         } else {
-            BlockChain chain = new BlockChain(args[0]);
+            BlockChain chain = new BlockChain(args[0], args[1]);
             Scanner in = new Scanner(System.in);
             boolean isRunning = true;
             while (isRunning) {
                 System.out.println(chain.toString());
                 String resp = promptFor(in, "Command?");
                   if (resp.equals("append")) {
-                    String inchiKey= (promptFor(in, "inchiKey?"));
-                    Block blk = new Block(chain.getSize(), inchiKey, chain.getHash());
+                    String inchiKey = (promptFor(in, "Please enter the Inchi Key"));
+                    String owner = (promptFor(in, "Who is the owner for this chemical structure?"));
+                    Block blk = new Block(chain.getSize(), owner, inchiKey, chain.getHash());
                         chain.append(blk);
                 } else if (resp.equals("remove")) {
                     if (!chain.removeLast()) {
@@ -55,9 +56,9 @@ public class BlockChainDriver {
                 	String inchi = promptFor(in, "Inchi?");
                 	boolean exists = chain.search(inchi);
                 	if(exists) {
-                		System.out.println("Yes");
+                		System.out.printf("Chemical structure with the Inchi Key %s is already in the blockchain\n", inchi);
                 	} else {
-                		System.out.println("No");
+                		System.out.printf("A chemical structure with the Inchi Key %s is not in the blockchain\n", inchi);
                 	}
                 } else {
                     System.out.printf("Error: \"%s\" is not a valid command\n", resp);

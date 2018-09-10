@@ -5,61 +5,25 @@ import java.security.NoSuchAlgorithmException;
 
 public class Block {
 	private int num;
+	private String owner;
 	private String inchiKey;
 	public String prevHash;
 	private long nonce;
 	public String hash;
 	private long timeStamp;
-	/*
-    private static byte[] intToBytes(int x) {
-        return ByteBuffer.allocate(4).putInt(x).array();
-    }
 
-    private static byte[] longToBytes(long x) {
-        return ByteBuffer.allocate(8).putLong(x).array();
-    }
 
-    private void mine() throws NoSuchAlgorithmException {
-        long nonce = 0;
-        while (true) {
-            Hash candidate = calculateHash(num, inchiKey, prevHash, nonce);
-            if (candidate.isValid()) {
-                this.nonce = nonce;
-                this.hash  = candidate;
-                return;
-            } else {
-                nonce += 1;
-            }
-        }
-    }
-
-    private Hash calculateHash(int num, int amount, Hash prevHash, long nonce) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("sha-256");
-        md.update(intToBytes(num));
-        md.update(intToBytes(amount));
-        if (prevHash != null) { md.update(prevHash.getData()); }
-        md.update(longToBytes(nonce));
-        return new Hash(md.digest());
-    }*/
-
-	public Block(int num, String inchiKey, String prevHash) throws NoSuchAlgorithmException {
+	public Block(int num, String owner, String inchiKey, String prevHash) throws NoSuchAlgorithmException {
 		this.num = num;
+		this.owner = owner;
 		this.inchiKey = inchiKey;
 		this.prevHash = prevHash;
-		// mine();
 		this.timeStamp = new Date().getTime();
 		this.hash = calculateHash();
 	}
 
-	/*  public Block(int num, int amount, Hash prevHash, long nonce) throws NoSuchAlgorithmException {
-        this.num = num;
-        this.inchiKey = amount;
-        this.prevHash = prevHash;
-        this.nonce = nonce;
-        this.hash = calculateHash(num, amount, prevHash, nonce);
-    }*/
-
 	public int getNum()       { return num; }
+	public String getowner()   { return owner; }
 	public String getInchiKey()    { return inchiKey; }
 	public long getNonce()    { return nonce; }
 	public String getPrevHash() { return prevHash; }
@@ -68,8 +32,8 @@ public class Block {
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
 		buf.append(String.format(
-				"Block %d (InchiKey: %s, Nonce: %d, prevHash: %s, hash: %s)",
-				num, inchiKey, nonce, prevHash, hash));
+				"Block %d (InchiKey: %s, Owner: %s, Nonce: %d, prevHash: %s, hash: %s)",
+				num, inchiKey, owner, nonce, prevHash, hash));
 		return buf.toString();
 	}
 	public String calculateHash() {
